@@ -22,8 +22,9 @@ class HomeController extends AbstractController
     {
 
         return $this->render('home/index.html.twig', [
-            "jeux" => $gr->findAll(),
-            "nb_joueurs" => count($pr->findAll())
+            "jeux"       => $gr->findAll(),
+            "nb_joueurs" => count($pr->findAll()),
+            "gagnants"   => $pr->findWinners()
         ]);
     }
 

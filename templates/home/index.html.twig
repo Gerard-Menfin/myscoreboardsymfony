@@ -13,6 +13,13 @@
 
     <hr>
     <p>Il y a <strong>{{ nb_joueurs }}</strong> joueurs inscrits dans la base de données.</p>
+    <hr>
+    <h2>Joueurs ayant déjà gagné une partie :</h2>
+    <ul>
+        {% for joueur in gagnants %}
+            <li>{{ joueur.nickname ~ " (" ~ joueur.email ~ ") " }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
 
 {% block piedpage %}footer de la page d'accueil{% endblock %}

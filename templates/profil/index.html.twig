@@ -7,6 +7,7 @@
     <ul class="list-group">
         <li class="list-group-item">Identifiant : {{ app.user.id }}</li>
         <li class="list-group-item">Pseudo : {{ app.user.pseudo }}</li>
+        <li class="list-group-item">E-mail : {{ app.user.player ? app.user.player.email : "" }}</li>
         <li class="list-group-item">Mot de passe : *****</li>
         <li class="list-group-item">Autorisations : 
             {% for r in app.user.roles %}

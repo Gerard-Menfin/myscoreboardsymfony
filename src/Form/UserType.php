@@ -13,6 +13,7 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $user = $options["data"]; // je récuppère la variable User qui est lié au formulaire dans le contrôleur, dans la méthode createForm()
         $builder
             ->add('pseudo')
             ->add('roles', ChoiceType::class, [
@@ -27,7 +28,9 @@ class UserType extends AbstractType
             ])
             ->add('password', TextType::class, [
                 'mapped' => false,
-                'required' => false
+                'required' => $user->getId() ? false : true  // si l'id n'est pas nul, le champ password n'est pas requis (edit) sinon il l'est (new)
+                                                             // on aurait pu écrire 
+                                                            //                          'required' => !$user->getId()
             ])
         ;
     }
