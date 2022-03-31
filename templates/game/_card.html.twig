@@ -1,0 +1,18 @@
+<div class="card" style="">
+    <div class="card-body">
+        <h5 class="card-title">{{ jeu.title }}</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Nb parties jouées : {{ jeu.contests|length }}</h6>
+        <p class="card-text">
+            Entre {{ jeu.minPlayers }} et {{ jeu.maxPlayers }} joueurs
+        </p>
+        <p> Ayant déjà joué : 
+           {% for partie in jeu.contests %}
+               {% for joueur in partie.players %}
+                   {{ joueur.nickname }},
+               {% endfor %}
+           {% endfor %} 
+        </p>
+        <a href="{{ path('app_home_contest', {title: jeu.title}) }}" class="card-link">Commencer une partie</a>
+        {# <a href="#" class="card-link">Another link</a> #}
+    </div>
+</div>
