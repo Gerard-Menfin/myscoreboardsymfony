@@ -7,10 +7,22 @@
     <ul class="list-group">
         <li class="list-group-item">Identifiant : {{ app.user.id }}</li>
         <li class="list-group-item">Pseudo : {{ app.user.pseudo }}</li>
-        <li class="list-group-item">Mot de passe : {{ app.user.password }}</li>
+        <li class="list-group-item">Mot de passe : *****</li>
         <li class="list-group-item">Autorisations : 
-            {% for role in app.user.roles %}
-                {{ role }}, 
+            {% for r in app.user.roles %}
+                {% if r == 'ROLE_ADMIN' %}
+                    Administrateur
+                {% elseif r == 'ROLE_PLAYER' %}
+                    Joueur
+                {% elseif r == 'ROLE_REFEREE' %}
+                    Arbitre
+                {% else %}
+                    Utilisateur
+                {% endif %}
+                {# {% if not loop.last %}
+                    ,
+                {% endif %} #}
+                {{ not loop.last ? ',' : '' }}
             {% endfor %}    
         </li>
     </ul>

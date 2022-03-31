@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\Contest;
 
 /**
  * @method Player|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,6 +21,30 @@ class PlayerRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Player::class);
     }
+
+    /**
+     * @return Player[] Retourne les joueurs ayant déjà gagné une partie
+     * SELECT p.* 
+     * FROM player p 
+     *  JOIN contest c ON c.winner_id = p.id
+     */
+    public function findWinners()
+    {
+        return $this->createQueryBuilder('p')
+           ->join(Contest::class, 'c', 'WITH', 'c.winner = p.id')
+            ->orderBy('p.nickname', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+
+
+
+
+
+
 
     /**
      * @throws ORMException
