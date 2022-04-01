@@ -7,7 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class UserType extends AbstractType
 {
@@ -15,7 +17,22 @@ class UserType extends AbstractType
     {
         $user = $options["data"]; // je récuppère la variable User qui est lié au formulaire dans le contrôleur, dans la méthode createForm()
         $builder
-            ->add('pseudo')
+            ->add('pseudo', TextType::class, [
+                "constraints" => [
+                    new Assert\NotNull([ "message" => "Veuillez saisir un pseudo pour pouvoir vous connecter" ]),
+                    new Assert\Length([
+                        "min" => 4,
+                        "minMessage" => "Le pseudo doit comporter au moins 4 caractères"
+                    ])
+                ]
+            ])
+            ->add('email', EmailType::class, [
+                'mapped' => false,
+                'label' => 'E-mail',
+                'constraints' => [
+                    new Assert\NotNull([ 'message' => "L'e-mail ne peut pas être vide" ])
+                ]
+            ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
                     'Administrateur' => 'ROLE_ADMIN',

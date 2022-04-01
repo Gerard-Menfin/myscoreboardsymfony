@@ -1,15 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Liste des Utilisateurs{% endblock %}
+
+{% block titreH1 %}
+    {{ block("title") }}
+{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Pseudo</th>
+                <th>E-mail</th>
                 <th>Roles</th>
                 <th>Password</th>
                 <th>actions</th>
@@ -20,6 +24,7 @@
             <tr>
                 <td>{{ user.id }}</td>
                 <td>{{ user.pseudo }}</td>
+                <td>{{ user.player ? user.player.email : "" }}</td>
                 {# EXO : afficher les roles en les remplaçant par 
                     Administateur pour le ROLE_ADMIN,
                     Joueur pour le ROLE_PLAYER,
@@ -54,17 +59,21 @@
                     
                 <td>*****</td>
                 <td>
-                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_user_show', {'id': user.id}) }}">
+                        <i class="fa fa-user"></i>
+                    </a>
+                    <a href="{{ path('app_admin_user_edit', {'id': user.id}) }}">
+                        <i class="fa fa-edit"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="5">Aucun utilisateur n'est enregistré</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_user_new') }}">Create new</a>
+    <a href="{{ path('app_admin_user_new') }}" class="btn btn-primary">Ajouter un utilisateur</a>
 {% endblock %}
