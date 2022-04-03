@@ -4,10 +4,12 @@ namespace App\Form;
 
 use App\Entity\Game;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -31,6 +33,18 @@ class GameType extends AbstractType
             ])
             ->add('min_players')
             ->add('max_players')
+            ->add('image', FileType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        "mimeTypes"        => [ "image/jpeg", "image/png", "image/gif" ],
+                        'mimeTypesMessage' => "Les formats autorisés sont gif, jpg, png",
+                        'maxSize'          => "2048k",
+                        'maxSizeMessage'   => "Le fichier ne peut pas peser plus de 2Mo"
+                    ])
+                ]
+            ])
             ->add('enregistrer', SubmitType::class)
         ;
     }

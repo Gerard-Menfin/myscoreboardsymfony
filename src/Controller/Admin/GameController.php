@@ -60,6 +60,29 @@ class GameController extends AbstractController
         $form->handleRequest($request);
 
         if( $form->isSubmitted() && $form->isValid() ){
+
+            // Vérification que l'image a bien été téléchargée (= l'input 'image' ne contient pas la valeur 'null')
+            // la variable $fichier contiendra les informations du fichier téléchargé dans l'input 'image' de type file
+            if( $fichier = $form->get('image')->getData() ){
+                
+                // Récupération du nom de fichier téléchargé dans la variable $nomFichier
+                $nomFichier = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
+
+                // Remplacement des espaces par des _ (underscores) dans le nom de fichier 
+                $nomFichier = str_replace(" ", "_", $nomFichier);
+
+                // Concaténation du nom de fichier avec une chaîne de caractères uniques (afin d'éviter les doublons)
+                $nomFichier .= "_" . uniqid() . "." . $fichier->guessExtension();
+
+                // Copie du fichier téléchargé dans le dossier 'public/images' avec le nouveau nom $nomFichier
+                // Si ce n'est pas fait, il sera impossible de retrouver l'image téléchargée
+                $fichier->move("images", $nomFichier);
+
+                // La propriété image de l'objet Game reçoit comme valeur le nom du fichier enregistré dans le dossier 'images'
+                // Si ce n'est pas fait, l'image ne sera pas associé à l'enregistrement d'un game en base de données
+                $jeu->setImage($nomFichier);
+            } 
+
             // la méthode persist() prépare la requête INSERT avec les données de l'objet passé en argument
             $em->persist($jeu);
 
@@ -83,7 +106,14 @@ class GameController extends AbstractController
         $jeu = $gameRepository->find($id);
         $form = $this->createForm(GameType::class, $jeu);
         $form->handleRequest($rq);
-        if(  $form->isSubmitted() && $form->isValid() ){
+        if( $form->isSubmitted() && $form->isValid() ){
+            if( $fichier = $form->get('image')->getData() ){
+                $nomFichier = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomFichier = str_replace(" ", "_", $nomFichier);
+                $nomFichier .= "_" . uniqid() . "." . $fichier->guessExtension();
+                $fichier->move("images", $nomFichier);
+                $jeu->setImage($nomFichier);
+            }
             $em->flush();
             return $this->redirectToRoute("app_admin_game");
         }
@@ -106,6 +136,13 @@ class GameController extends AbstractController
         $form = $this->createForm(GameType::class, $jeu);
         $form->handleRequest($rq);
         if(  $form->isSubmitted() && $form->isValid() ){
+            if( $fichier = $form->get('image')->getData() ){
+                $nomFichier = pathinfo($fichier->getClientOriginalName(), PATHINFO_FILENAME);
+                $nomFichier = str_replace(" ", "_", $nomFichier);
+                $nomFichier .= "_" . uniqid() . "." . $fichier->guessExtension();
+                $fichier->move("images", $nomFichier);
+                $jeu->setImage($nomFichier);
+            }
             $em->flush();
             return $this->redirectToRoute("app_admin_game");
         }

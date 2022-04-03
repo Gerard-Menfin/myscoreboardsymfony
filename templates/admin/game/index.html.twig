@@ -9,6 +9,7 @@
             <tr>
                 <th>ID</th>
                 <th>Titre</th>
+                <th>Image</th>
                 <th>Joueurs min</th>
                 <th>Joueurs Max</th>
                 <th>Actions</th>
@@ -20,6 +21,7 @@
                 <tr>
                     <td>{{ game.id }}</td>
                     <td>{{ game.title }}</td>
+                    <td><img src="{{ asset('images/' ~ game.image) }}" alt="" class="miniature"></td>
                     <td>{{ game.minPlayers }}</td>
                     <td>{{ game.maxPlayers }}</td>
                     <td>
