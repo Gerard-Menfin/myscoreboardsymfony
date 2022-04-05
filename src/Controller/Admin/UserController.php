@@ -81,14 +81,9 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if( !in_array("ROLE_ADMIN", $user->getRoles()) ){
-                $newPlayer = new Player;
-                $newPlayer->setNickname( $user->getPseudo() );
-                $newPlayer->setEmail( $form->get("email")->getData() );
-                // $newPlayer->setEmail( $request->request->get("email") );  // on peut récupérer la valeur du champ avec l'objet Request
-                $user->setPlayer( $newPlayer );
-            } else {
-                $user->setRoles(["ROLE_ADMIN"]);
+            $email = $form->get("email")->getData();
+            if( $email != $user->getPlayer()->getEmail() ){
+                $user->getPlayer()->setEmail( $email );
             }
 
             if( $mdp = $form->get('password')->getData() ){
