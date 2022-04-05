@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk=self.webpackChunk||[]).push([[328],{819:(s,e,n)=>{n(755)((function(){console.log("admin.js")}))}},s=>{s.O(0,[912],(()=>{return e=819,s(s.s=e);var e}));s.O()}]);
