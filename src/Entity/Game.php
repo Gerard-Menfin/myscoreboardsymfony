@@ -6,6 +6,7 @@ use App\Repository\GameRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=GameRepository::class)
@@ -26,12 +27,22 @@ class Game
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\LessThanOrEqual(
+     *      propertyPath = "max_players",
+     *      message = "Le nombre de joueurs min doit être inférieur au nombre de joueurs max"
+     * )
      */
+    #[Assert\LessThanOrEqual(propertyPath: 'max_players', message: 'Le nombre de joueurs min...')]
     private $min_players;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\GreaterThanOrEqual(
+     *      propertyPath = "min_players",
+     *      message = "Le nombre de joueurs max doit être supérieur au nombre de joueurs min"
+     * )
      */
+    #[Assert\LessThanOrEqual(propertyPath: 'max_players', message: 'Le nombre de joueurs min...')]
     private $max_players;
 
     /**
