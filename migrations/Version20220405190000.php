@@ -20,7 +20,7 @@ final class Version20220405190000 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $fichier = file_get_contents("2022-04-05_myscoreboardsymfony.sql.sql"); 
+        $fichier = file_get_contents(__DIR__ . "/2022-04-05_myscoreboardsymfony.sql.sql"); 
         $this->addSql($fichier);
     }
 
