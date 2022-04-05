@@ -31,7 +31,8 @@ class UserType extends AbstractType
                 'label' => 'E-mail',
                 'constraints' => [
                     new Assert\NotNull([ 'message' => "L'e-mail ne peut pas être vide" ])
-                ]
+                ],
+                'data' => $user->getPlayer() ? $user->getPlayer()->getEmail() : ""
             ])
             ->add('roles', ChoiceType::class, [
                 'choices' => [
