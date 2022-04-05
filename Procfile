@@ -1,1 +1,2 @@
-postdeploy: php bin/console doctrine:migrations:migrate
+postdeploy: yarn install
+postdeploy: yarn encore dev
