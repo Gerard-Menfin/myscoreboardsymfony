@@ -24,6 +24,68 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `player`
+--
+
+CREATE TABLE `player` (
+  `id` int(11) NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nickname` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `player`
+--
+
+INSERT INTO `player` (`id`, `email`, `nickname`) VALUES
+(1, 'luke.skywalker@rogue.sw', 'Luke'),
+(2, 'amidala.padme@naboo.gov', 'Padmeeeee'),
+(3, 'han.solo@millenium-falcon.com', 'HanSolo'),
+(4, 'chewbacca@wook.ie', 'Chewbie'),
+(5, 'rey@jakku.planet', 'Ray'),
+(7, 'jon.snow@winter.iscoming', 'Jon Snow'),
+(8, 'nouveau@yopmail.com', 'nouveau'),
+(9, 'panther@bla.ck', 'Black Panther'),
+(10, 'onsenfout@yopmail.com', 'hulk'),
+(11, 'lando.calrissian@bespin.com', 'lando'),
+(12, 'client@yopmail.com', 'client'),
+(13, 'test@yopmail.com', 'test'),
+(14, 'nouvelemail@yopmail.com', 'test2'),
+(15, 'JonSnow@yopmail.com', 'JonSnow'),
+(16, 'NedStark@yopmail.com', 'NedStark'),
+(17, 'molina@fff.fr', 'molina'),
+(18, 'kingofthenorth@yopmail.com', 'JonSnow');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `game`
+--
+
+CREATE TABLE `game` (
+  `id` int(11) NOT NULL,
+  `title` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `min_players` int(11) NOT NULL,
+  `max_players` int(11) NOT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `game`
+--
+
+INSERT INTO `game` (`id`, `title`, `min_players`, `max_players`, `image`) VALUES
+(23, '7 Wonders', 2, 7, NULL),
+(24, 'Ticket to Ride', 2, 5, NULL),
+(25, 'Pandemic', 2, 4, NULL),
+(26, 'Munchkin', 3, 6, NULL),
+(27, 'Scrabble', 2, 4, '_624719745c684.png'),
+(28, 'Bataille', 2, 5, NULL),
+(30, 'Echecs', 2, 2, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `contest`
 --
 
@@ -79,68 +141,6 @@ INSERT INTO `contest_player` (`contest_id`, `player_id`) VALUES
 (5, 4),
 (6, 2),
 (6, 3);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `game`
---
-
-CREATE TABLE `game` (
-  `id` int(11) NOT NULL,
-  `title` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `min_players` int(11) NOT NULL,
-  `max_players` int(11) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `game`
---
-
-INSERT INTO `game` (`id`, `title`, `min_players`, `max_players`, `image`) VALUES
-(23, '7 Wonders', 2, 7, NULL),
-(24, 'Ticket to Ride', 2, 5, NULL),
-(25, 'Pandemic', 2, 4, NULL),
-(26, 'Munchkin', 3, 6, NULL),
-(27, 'Scrabble', 2, 4, '_624719745c684.png'),
-(28, 'Bataille', 2, 5, NULL),
-(30, 'Echecs', 2, 2, NULL);
-
--- --------------------------------------------------------
-
---
--- Structure de la table `player`
---
-
-CREATE TABLE `player` (
-  `id` int(11) NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nickname` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Déchargement des données de la table `player`
---
-
-INSERT INTO `player` (`id`, `email`, `nickname`) VALUES
-(1, 'luke.skywalker@rogue.sw', 'Luke'),
-(2, 'amidala.padme@naboo.gov', 'Padmeeeee'),
-(3, 'han.solo@millenium-falcon.com', 'HanSolo'),
-(4, 'chewbacca@wook.ie', 'Chewbie'),
-(5, 'rey@jakku.planet', 'Ray'),
-(7, 'jon.snow@winter.iscoming', 'Jon Snow'),
-(8, 'nouveau@yopmail.com', 'nouveau'),
-(9, 'panther@bla.ck', 'Black Panther'),
-(10, 'onsenfout@yopmail.com', 'hulk'),
-(11, 'lando.calrissian@bespin.com', 'lando'),
-(12, 'client@yopmail.com', 'client'),
-(13, 'test@yopmail.com', 'test'),
-(14, 'nouvelemail@yopmail.com', 'test2'),
-(15, 'JonSnow@yopmail.com', 'JonSnow'),
-(16, 'NedStark@yopmail.com', 'NedStark'),
-(17, 'molina@fff.fr', 'molina'),
-(18, 'kingofthenorth@yopmail.com', 'JonSnow');
 
 -- --------------------------------------------------------
 
