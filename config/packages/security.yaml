@@ -38,6 +38,9 @@ security:
         # Toutes les routes dont le chemin commence par /admin ne seront accessibles qu'à un utilisateur ayant le rôle admin
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profil, roles: ROLE_PLAYER }
+    
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_PLAYER, ROLE_REFEREE  # le ROLE_ADMIN a aussi les droits des ROLE_PLAYER et ROLE_REFEREE
 
 when@test:
     security:
