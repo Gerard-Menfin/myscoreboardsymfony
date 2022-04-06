@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -22,18 +21,6 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `player`
---
-
-CREATE TABLE `player` (
-  `id` int(11) NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nickname` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `player`
 --
 
@@ -59,18 +46,6 @@ INSERT INTO `player` (`id`, `email`, `nickname`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `game`
---
-
-CREATE TABLE `game` (
-  `id` int(11) NOT NULL,
-  `title` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `min_players` int(11) NOT NULL,
-  `max_players` int(11) NOT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `game`
 --
 
@@ -86,17 +61,6 @@ INSERT INTO `game` (`id`, `title`, `min_players`, `max_players`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `contest`
---
-
-CREATE TABLE `contest` (
-  `id` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL,
-  `winner_id` int(11) DEFAULT NULL,
-  `start_date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `contest`
 --
 
@@ -109,15 +73,6 @@ INSERT INTO `contest` (`id`, `game_id`, `winner_id`, `start_date`) VALUES
 (6, 30, NULL, '2022-03-30');
 
 -- --------------------------------------------------------
-
---
--- Structure de la table `contest_player`
---
-
-CREATE TABLE `contest_player` (
-  `contest_id` int(11) NOT NULL,
-  `player_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `contest_player`
@@ -145,18 +100,6 @@ INSERT INTO `contest_player` (`contest_id`, `player_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `user`
---
-
-CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
-  `pseudo` varchar(180) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `roles` longtext COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '(DC2Type:json)',
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `player_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
 -- Déchargement des données de la table `user`
 --
 
@@ -174,6 +117,7 @@ INSERT INTO `user` (`id`, `pseudo`, `roles`, `password`, `player_id`) VALUES
 (11, 'molina', '[\"ROLE_USER\",\"ROLE_REFEREE\"]', '$2y$13$.aeZZPU6qxzSCNr9rNvIlOKz0bZMacK3hDnSQqVakbEfg2nLUlMmS', 17),
 (12, 'spidey', '[\"ROLE_USER\",\"ROLE_ADMIN\"]', '$2y$13$LSdnFfkQ4kmlLuSYb9mNDuVJ.FP/7v2WCmlda4bMbptK.62WMUPCy', NULL),
 (13, 'admin2', '[\"ROLE_ADMIN\"]', '$2y$13$YLfsbdR7vOXUUyyDtu5lhOWNiZvikOLdED1LtesYXdMKTqY8rLf7G', NULL);
+
 
 
 COMMIT;
