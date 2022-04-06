@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TestController extends AbstractController
 {
@@ -88,5 +90,24 @@ class TestController extends AbstractController
         $objet->age = 40;
         return $this->render("test/assoc.html.twig", [ "personne" => $objet ]);
     }
+
+    /**
+     * @Route("/test/salut/{prenom}")
+     */
+    public function salutation($prenom): Response
+    {
+        $phrase = "Bonjour, $prenom, comment ça va ?"; 
+        return $this->render("test/salutation.html.twig", [ "phrase" => $phrase ]);
+    }
     
+    /**
+     * @Route("/admin/test/migrations", name="test_migration")
+     */
+    public function FunctionName(EntityManagerInterface $em)
+    {
+        $statement = $em->getConnection()->prepare("SELECT * FROM doctrine_migration_versions");
+        $resultats = $statement->executeQuery();
+        dd($resultats);
+        return $this->render("test/migration.html.twig", ["migrations" => $resultats->fetchAll(\Doctrine\DBAL\FetchMode::ASSOCIATIVE)]);
+    }
 }
