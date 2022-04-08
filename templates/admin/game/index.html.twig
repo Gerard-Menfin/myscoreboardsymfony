@@ -25,6 +25,7 @@
                     <td>{{ game.minPlayers }}</td>
                     <td>{{ game.maxPlayers }}</td>
                     <td>
+                        <a href="{{ path('app_admin_game_show', {id: game.id}) }}">   <i class="fa fa-dice"></i>  </a>
                         <a href="{{ path('app_admin_game_edit', {id: game.id}) }}">   <i class="fa fa-edit"></i>  </a>
                         <a href="{{ path('app_admin_game_modifier', {title: game.title}) }}">   <i class="fa fa-pen"></i>  </a>
                         <a href="{{ path('app_admin_game_delete', {id: game.id}) }}"> <i class="fa fa-trash"></i> </a>

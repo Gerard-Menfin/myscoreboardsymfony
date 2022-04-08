@@ -25,17 +25,23 @@
                 <td>{{ contest.players|length }}</td>
                 <td>{{ contest.winner ? contest.winner.nickname : "" }}</td>
                 <td>
-                    <a href="{{ path('app_admin_contest_show', {'id': contest.id}) }}">show</a>
-                    <a href="{{ path('app_admin_contest_edit', {'id': contest.id}) }}">edit</a>
+                    <a href="{{ path('app_admin_contest_show', {'id': contest.id}) }}">
+                        <i class="fa fa-game-board"></i>
+                    </a>
+                    <a href="{{ path('app_admin_contest_edit', {'id': contest.id}) }}">
+                        <i class="fa fa-edit"></i>
+                    </a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Aucune partie n'a commencé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_admin_contest_new') }}">Create new</a>
+    <a href="{{ path('app_admin_contest_new') }}">
+        <i class="fa fa-plus"></i> Nouvelle partie
+    </a>
 {% endblock %}
