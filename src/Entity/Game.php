@@ -42,7 +42,7 @@ class Game
      *      message = "Le nombre de joueurs max doit être supérieur au nombre de joueurs min"
      * )
      */
-    #[Assert\LessThanOrEqual(propertyPath: 'max_players', message: 'Le nombre de joueurs min...')]
+    #[Assert\GreaterThanOrEqual(propertyPath: 'min_players', message: 'Le nombre de joueurs min...')]
     private $max_players;
 
     /**
